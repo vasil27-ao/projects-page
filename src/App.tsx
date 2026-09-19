@@ -126,6 +126,15 @@ export default function App() {
     )
   }, [projects, query])
 
+  const projectNumbers = useMemo(
+    () => new Map(
+      [...projects]
+        .sort((firstProject, secondProject) => firstProject.id - secondProject.id)
+        .map((project, index) => [project.id, index + 1]),
+    ),
+    [projects],
+  )
+
   useEffect(() => {
     if (!isFormOpen) return
     nameInputRef.current?.focus()
@@ -210,13 +219,13 @@ export default function App() {
     <main className="page-shell">
       <section className="projects" aria-labelledby="page-title">
         <header className="page-header">
-          <div>
-            <p className="eyebrow">Рабочее пространство</p>
+          <p className="eyebrow">Рабочее пространство</p>
+          <div className="title-row">
             <h1 id="page-title">Проекты</h1>
+            <span className="project-count" aria-label={`Всего проектов: ${projects.length}`}>
+              {projects.length.toString().padStart(2, '0')}
+            </span>
           </div>
-          <span className="project-count" aria-label={`Всего проектов: ${projects.length}`}>
-            {projects.length.toString().padStart(2, '0')}
-          </span>
         </header>
 
         <div className="toolbar">
@@ -249,7 +258,9 @@ export default function App() {
                   <span className={`status status--${project.status.replace(' ', '-').toLowerCase()}`}>
                     {project.status}
                   </span>
-                  <span className="project-number">#{String(project.id).slice(-2).padStart(2, '0')}</span>
+                  <span className="project-number">
+                    #{String(projectNumbers.get(project.id) ?? 0).padStart(2, '0')}
+                  </span>
                 </div>
                 <h2>{project.name}</h2>
                 <p className={project.description ? '' : 'muted'}>
