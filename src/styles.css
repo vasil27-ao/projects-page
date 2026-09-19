@@ -28,11 +28,14 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .projects { width: min(1120px, 100%); margin: 0 auto; }
 
 .page-header {
+  margin-bottom: 38px;
+}
+
+.title-row {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 38px;
 }
 
 .eyebrow {
@@ -48,7 +51,7 @@ h1, h2, p { overflow-wrap: anywhere; }
 h1 { margin: 0; color: #111827; font-size: clamp(2.5rem, 7vw, 4.6rem); line-height: 0.96; letter-spacing: -0.055em; }
 
 .project-count {
-  color: #c7d0df;
+  color: #6d7c94;
   font-size: clamp(2.6rem, 6vw, 4.8rem);
   font-weight: 800;
   line-height: 0.85;
@@ -161,7 +164,8 @@ h1 { margin: 0; color: #111827; font-size: clamp(2.5rem, 7vw, 4.6rem); line-heig
 
 @media (max-width: 560px) {
   .page-shell { padding: 28px 16px 44px; }
-  .page-header { align-items: flex-start; margin-bottom: 28px; }
+  .page-header { margin-bottom: 28px; }
+  .title-row { align-items: baseline; }
   .project-count { font-size: 2.8rem; }
   .toolbar { flex-direction: column; padding: 10px; }
   .search-field, .primary-button { width: 100%; }
